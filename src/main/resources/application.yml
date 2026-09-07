@@ -1,26 +1,39 @@
-#port 결정 = default 8080 = 9090
-#Egiex 80 / Jenkins : 8080
 server:
   port: 9090
   servlet:
     context-path: /
 spring:
+  #mvc = 파일업로드 
   datasource:
-    url: jdbc:postgresql://localhost:5432/recipe
-    username: postgres
-    password: 1234
-    driver-class-name: org.postgresql.Driver 
+    postgres:
+      jdbc-url: jdbc:postgresql://localhost:5432/recipe
+      username: postgres
+      password: 1234
+      driver-class-name: org.postgresql.Driver 
+    oracle:
+      jdbc-url: ${DB_URL}
+      username: ${DB_USERNAME}
+      password: ${DB_PASSWORD}
+      driver-class-name: oracle.jdbc.driver.OracleDriver
   thymeleaf:
     cache: false
     encoding: UTF-8
     prefix: classpath:/templates/
     suffix: .html
     mode: HTML
+  ai:
+    google:
+      genai:
+        api-key: ${GEN_KEY}
+        embedding:
+          options:
+            model: gemini-embedding-001
 # mybatis 
 mybatis:
   type-aliases-package: com.sist.web.vo
-  mapper-locations: mybatis/mapper/*.xml
-
-# security 
-# spring ai 
-# websocket = 카프카   
+  mapper-locations: 
+   - classapth:/mapper/oracle/*.xml
+   - classpath:/mapper/postgres/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+ 
