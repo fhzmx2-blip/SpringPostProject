@@ -11,9 +11,9 @@ spring:
       password: 1234
       driver-class-name: org.postgresql.Driver 
     oracle:
-      jdbc-url: jdbc:oracle:thin:@211.238.142.45:1521:XE
-      username: hr
-      password: happy
+      jdbc-url: ${DB_URL}
+      username: ${DB_USERNAME}
+      password: ${DB_PASSWORD}
       driver-class-name: oracle.jdbc.driver.OracleDriver
   thymeleaf:
     cache: false
